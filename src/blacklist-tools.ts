@@ -34,6 +34,9 @@ export function registerBlacklistTools(server: McpServer, client: AxiosInstance)
     'get_blacklist',
     'Retrieve the AbuseIPDB blacklist of most-reported malicious IP addresses. Returns confidence distribution, top countries, and sample entries. Requires AbuseIPDB subscription plan.',
     GetBlacklistSchema.shape,
-    (args: unknown) => handleGetBlacklist(client, args as Parameters<typeof handleGetBlacklist>[1])
+    async (args: unknown) => {
+      const text = await handleGetBlacklist(client, args as Parameters<typeof handleGetBlacklist>[1]);
+      return { content: [{ type: 'text', text }] };
+    }
   );
 }

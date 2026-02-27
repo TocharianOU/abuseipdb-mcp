@@ -31,6 +31,9 @@ export function registerBlockTools(server: McpServer, client: AxiosInstance): vo
     'check_block',
     'Check all reported IP addresses within a CIDR network block against AbuseIPDB. Returns network summary, total reported addresses, and top threats sorted by confidence score. Requires AbuseIPDB subscription plan.',
     CheckBlockSchema.shape,
-    (args: unknown) => handleCheckBlock(client, args as Parameters<typeof handleCheckBlock>[1])
+    async (args: unknown) => {
+      const text = await handleCheckBlock(client, args as Parameters<typeof handleCheckBlock>[1]);
+      return { content: [{ type: 'text', text }] };
+    }
   );
 }

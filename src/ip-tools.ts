@@ -60,13 +60,19 @@ export function registerIpTools(server: McpServer, client: AxiosInstance): void 
     'check_ip',
     'Check the reputation of a single IP address using AbuseIPDB. Returns abuse confidence score (0–100%), risk level, ISP, country, total reports, and optional verbose report details.',
     CheckIpSchema.shape,
-    (args: unknown) => handleCheckIp(client, args as Parameters<typeof handleCheckIp>[1])
+    async (args: unknown) => {
+      const text = await handleCheckIp(client, args as Parameters<typeof handleCheckIp>[1]);
+      return { content: [{ type: 'text', text }] };
+    }
   );
 
   registerTool(
     'bulk_check',
     'Check the reputation of multiple IP addresses in batch (up to 100). Returns a summary of flagged IPs with confidence scores, risk levels, and country/ISP information.',
     BulkCheckSchema.shape,
-    (args: unknown) => handleBulkCheck(client, args as Parameters<typeof handleBulkCheck>[1])
+    async (args: unknown) => {
+      const text = await handleBulkCheck(client, args as Parameters<typeof handleBulkCheck>[1]);
+      return { content: [{ type: 'text', text }] };
+    }
   );
 }

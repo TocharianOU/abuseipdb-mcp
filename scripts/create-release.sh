@@ -8,7 +8,7 @@ echo "Building v${VERSION}..."
 npm run build
 
 echo "Creating release archive: ${ARCHIVE}"
-tar -czf "${ARCHIVE}" dist logos LICENSE README.md server.json package.json
+tar -czf "${ARCHIVE}" dist logos node_modules LICENSE README.md server.json package.json
 
 echo "Generating checksums..."
 sha256sum "${ARCHIVE}" > "${ARCHIVE}.sha256"
