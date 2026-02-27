@@ -1,0 +1,53 @@
+{
+  "name": "@tocharianou/abuseipdb-mcp",
+  "description": "AbuseIPDB MCP Server – IP reputation, abuse confidence scoring, and threat blacklist",
+  "version": "1.0.0",
+  "mcpName": "io.github.TocharianOU/abuseipdb",
+  "license": "Apache-2.0",
+  "author": "TocharianOU",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "bin": {
+    "abuseipdb-mcp": "dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TocharianOU/abuseipdb-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TocharianOU/abuseipdb-mcp/issues"
+  },
+  "homepage": "https://github.com/TocharianOU/abuseipdb-mcp#readme",
+  "keywords": [
+    "abuseipdb", "mcp", "mcp-server", "model-context-protocol",
+    "security", "threat-intelligence", "ip-reputation",
+    "abuse-detection", "blacklist", "soc", "claude", "anthropic"
+  ],
+  "files": ["dist", "logos", "LICENSE", "README.md", "server.json"],
+  "scripts": {
+    "build": "tsc && shx chmod +x dist/index.js",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "start": "node dist/index.js",
+    "start:http": "MCP_TRANSPORT=http node dist/index.js",
+    "inspector": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "release": "./scripts/create-release.sh",
+    "release:npm": "npm run build && tar -czf abuseipdb-mcp-v$npm_package_version.tar.gz dist logos LICENSE README.md server.json package.json"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.23.0",
+    "@types/express": "^5.0.3",
+    "axios": "^1.8.4",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "zod": "^3.24.2"
+  },
+  "engines": { "node": ">=18" },
+  "devDependencies": {
+    "@types/node": "22.13.15",
+    "shx": "0.4.0",
+    "typescript": "^5.8.3"
+  },
+  "publishConfig": { "access": "public" }
+}
