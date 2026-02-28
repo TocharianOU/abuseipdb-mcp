@@ -38,8 +38,6 @@ export async function createAbuseIPDBMcpServer(options: ServerCreationOptions): 
   registerIpTools(server, client, maxTokenCall);
   registerBlockTools(server, client, maxTokenCall);
   registerBlacklistTools(server, client, maxTokenCall);
-  registerBlockTools(server, client, maxTokenCall);
-  registerBlacklistTools(server, client, maxTokenCall);
 
   return server;
 }
