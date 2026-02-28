@@ -1,7 +1,7 @@
 {
   "name": "@tocharianou/abuseipdb-mcp",
   "description": "AbuseIPDB MCP Server – IP reputation, abuse confidence scoring, and threat blacklist",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "mcpName": "io.github.TocharianOU/abuseipdb",
   "license": "Apache-2.0",
   "author": "TocharianOU",
@@ -20,11 +20,26 @@
   },
   "homepage": "https://github.com/TocharianOU/abuseipdb-mcp#readme",
   "keywords": [
-    "abuseipdb", "mcp", "mcp-server", "model-context-protocol",
-    "security", "threat-intelligence", "ip-reputation",
-    "abuse-detection", "blacklist", "soc", "claude", "anthropic"
+    "abuseipdb",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "security",
+    "threat-intelligence",
+    "ip-reputation",
+    "abuse-detection",
+    "blacklist",
+    "soc",
+    "claude",
+    "anthropic"
   ],
-  "files": ["dist", "logos", "LICENSE", "README.md", "server.json"],
+  "files": [
+    "dist",
+    "logos",
+    "LICENSE",
+    "README.md",
+    "server.json"
+  ],
   "scripts": {
     "build": "tsc && shx chmod +x dist/index.js",
     "prepare": "npm run build",
@@ -44,11 +59,15 @@
     "express": "^5.1.0",
     "zod": "^3.24.2"
   },
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
     "@types/node": "22.13.15",
     "shx": "0.4.0",
     "typescript": "^5.8.3"
   },
-  "publishConfig": { "access": "public" }
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -4,40 +4,111 @@
   "description": "AbuseIPDB MCP Server for IP reputation checks, abuse confidence scoring, CIDR block analysis, and threat blacklist",
   "title": "AbuseIPDB",
   "websiteUrl": "https://github.com/TocharianOU/abuseipdb-mcp",
-  "repository": { "url": "https://github.com/TocharianOU/abuseipdb-mcp", "source": "github" },
-  "version": "1.0.1",
+  "repository": {
+    "url": "https://github.com/TocharianOU/abuseipdb-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@tocharianou/abuseipdb-mcp",
-      "version": "1.0.1",
-      "transport": { "type": "stdio" },
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
       "environmentVariables": [
-        { "name": "ABUSEIPDB_API_KEY", "description": "AbuseIPDB API key. Get yours at https://www.abuseipdb.com/account/api", "isRequired": false, "isSecret": true, "format": "string" },
-        { "name": "ABUSEIPDB_BASE_URL", "description": "Override AbuseIPDB API base URL (proxy/gateway). Defaults to https://api.abuseipdb.com/api/v2", "isRequired": false, "format": "string" },
-        { "name": "ABUSEIPDB_AUTH_TOKEN", "description": "Bearer token for proxy authentication. Used when ABUSEIPDB_BASE_URL points to a custom endpoint.", "isRequired": false, "isSecret": true, "format": "string" }
+        {
+          "name": "ABUSEIPDB_API_KEY",
+          "description": "AbuseIPDB API key. Get yours at https://www.abuseipdb.com/account/api",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "ABUSEIPDB_BASE_URL",
+          "description": "Override AbuseIPDB API base URL (proxy/gateway). Defaults to https://api.abuseipdb.com/api/v2",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "ABUSEIPDB_AUTH_TOKEN",
+          "description": "Bearer token for proxy authentication. Used when ABUSEIPDB_BASE_URL points to a custom endpoint.",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        }
       ]
     },
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@tocharianou/abuseipdb-mcp",
-      "version": "1.0.1",
-      "transport": { "type": "streamable-http", "url": "http://localhost:{MCP_HTTP_PORT}/mcp" },
+      "version": "1.0.0",
+      "transport": {
+        "type": "streamable-http",
+        "url": "http://localhost:{MCP_HTTP_PORT}/mcp"
+      },
       "environmentVariables": [
-        { "name": "MCP_TRANSPORT", "description": "Transport mode", "isRequired": true, "format": "string", "default": "http", "choices": ["stdio", "http"] },
-        { "name": "MCP_HTTP_PORT", "description": "HTTP server port", "isRequired": false, "format": "number", "default": "3000" },
-        { "name": "ABUSEIPDB_API_KEY", "description": "AbuseIPDB API key", "isRequired": false, "isSecret": true, "format": "string" },
-        { "name": "ABUSEIPDB_BASE_URL", "description": "Override AbuseIPDB API base URL", "isRequired": false, "format": "string" },
-        { "name": "ABUSEIPDB_AUTH_TOKEN", "description": "Bearer token for proxy authentication", "isRequired": false, "isSecret": true, "format": "string" }
+        {
+          "name": "MCP_TRANSPORT",
+          "description": "Transport mode",
+          "isRequired": true,
+          "format": "string",
+          "default": "http",
+          "choices": [
+            "stdio",
+            "http"
+          ]
+        },
+        {
+          "name": "MCP_HTTP_PORT",
+          "description": "HTTP server port",
+          "isRequired": false,
+          "format": "number",
+          "default": "3000"
+        },
+        {
+          "name": "ABUSEIPDB_API_KEY",
+          "description": "AbuseIPDB API key",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "ABUSEIPDB_BASE_URL",
+          "description": "Override AbuseIPDB API base URL",
+          "isRequired": false,
+          "format": "string"
+        },
+        {
+          "name": "ABUSEIPDB_AUTH_TOKEN",
+          "description": "Bearer token for proxy authentication",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        }
       ]
     }
   ],
   "_meta": {
     "io.modelcontextprotocol.registry/publisher-provided": {
-      "tool": "manual", "version": "1.0.1",
-      "features": { "transport_modes": ["stdio", "http"], "proxy_support": true, "analysis_types": ["ip", "cidr", "blacklist", "bulk"] }
+      "tool": "manual",
+      "version": "1.0.0",
+      "features": {
+        "transport_modes": [
+          "stdio",
+          "http"
+        ],
+        "proxy_support": true,
+        "analysis_types": [
+          "ip",
+          "cidr",
+          "blacklist",
+          "bulk"
+        ]
+      }
     }
   }
 }
