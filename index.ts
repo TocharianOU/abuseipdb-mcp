@@ -33,9 +33,13 @@ export async function createAbuseIPDBMcpServer(options: ServerCreationOptions): 
     ...(description ? { description } : {}),
   });
 
-  registerIpTools(server, client);
-  registerBlockTools(server, client);
-  registerBlacklistTools(server, client);
+  const maxTokenCall = parseInt(process.env.MAX_TOKEN_CALL ?? '20000', 10);
+
+  registerIpTools(server, client, maxTokenCall);
+  registerBlockTools(server, client, maxTokenCall);
+  registerBlacklistTools(server, client, maxTokenCall);
+  registerBlockTools(server, client, maxTokenCall);
+  registerBlacklistTools(server, client, maxTokenCall);
 
   return server;
 }

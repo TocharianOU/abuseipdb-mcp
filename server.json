@@ -5,13 +5,13 @@
   "title": "AbuseIPDB",
   "websiteUrl": "https://github.com/TocharianOU/abuseipdb-mcp",
   "repository": { "url": "https://github.com/TocharianOU/abuseipdb-mcp", "source": "github" },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@tocharianou/abuseipdb-mcp",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "transport": { "type": "stdio" },
       "environmentVariables": [
         { "name": "ABUSEIPDB_API_KEY", "description": "AbuseIPDB API key. Get yours at https://www.abuseipdb.com/account/api", "isRequired": false, "isSecret": true, "format": "string" },
@@ -23,7 +23,7 @@
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@tocharianou/abuseipdb-mcp",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "transport": { "type": "streamable-http", "url": "http://localhost:{MCP_HTTP_PORT}/mcp" },
       "environmentVariables": [
         { "name": "MCP_TRANSPORT", "description": "Transport mode", "isRequired": true, "format": "string", "default": "http", "choices": ["stdio", "http"] },
@@ -36,7 +36,7 @@
   ],
   "_meta": {
     "io.modelcontextprotocol.registry/publisher-provided": {
-      "tool": "manual", "version": "1.0.0",
+      "tool": "manual", "version": "1.0.1",
       "features": { "transport_modes": ["stdio", "http"], "proxy_support": true, "analysis_types": ["ip", "cidr", "blacklist", "bulk"] }
     }
   }

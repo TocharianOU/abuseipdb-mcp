@@ -2,6 +2,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { AxiosInstance } from 'axios';
 import { z } from 'zod';
 import { handleCheckIp, handleBulkCheck } from './handlers/ip.js';
+import { checkTokenLimit } from './utils/token-limiter.js';
 
 // Note: server.tool is called via (server as any) cast to avoid TypeScript
 // exceeding instantiation-depth limits when inferring Zod schema generics.
@@ -26,6 +27,11 @@ const CheckIpSchema = z.object({
     .max(100)
     .optional()
     .describe('Abuse confidence % threshold for flagging the IP (0–100, default: 75)'),
+  break_token_rule: z
+    .boolean()
+    .optional()
+    .default(false)
+    .describe('Set to true to bypass token limits in critical situations (default: false)'),
 });
 
 const BulkCheckSchema = z.object({
@@ -48,12 +54,17 @@ const BulkCheckSchema = z.object({
     .max(100)
     .optional()
     .describe('Abuse confidence % threshold for flagging (0–100, default: 75)'),
+  break_token_rule: z
+    .boolean()
+    .optional()
+    .default(false)
+    .describe('Set to true to bypass token limits in critical situations (default: false)'),
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyTool = (name: string, desc: string, shape: unknown, cb: (args: unknown) => unknown) => void;
 
-export function registerIpTools(server: McpServer, client: AxiosInstance): void {
+export function registerIpTools(server: McpServer, client: AxiosInstance, maxTokenCall = 20000): void {
   const registerTool = (server as any).tool.bind(server) as AnyTool;
 
   registerTool(
@@ -61,7 +72,12 @@ export function registerIpTools(server: McpServer, client: AxiosInstance): void 
     'Check the reputation of a single IP address using AbuseIPDB. Returns abuse confidence score (0–100%), risk level, ISP, country, total reports, and optional verbose report details.',
     CheckIpSchema.shape,
     async (args: unknown) => {
-      const text = await handleCheckIp(client, args as Parameters<typeof handleCheckIp>[1]);
+      const parsed = CheckIpSchema.parse(args);
+      const text = await handleCheckIp(client, parsed);
+      const tokenCheck = checkTokenLimit(text, maxTokenCall, parsed.break_token_rule ?? false);
+      if (!tokenCheck.allowed) {
+        return { content: [{ type: 'text', text: tokenCheck.error! }] };
+      }
       return { content: [{ type: 'text', text }] };
     }
   );
@@ -71,7 +87,12 @@ export function registerIpTools(server: McpServer, client: AxiosInstance): void 
     'Check the reputation of multiple IP addresses in batch (up to 100). Returns a summary of flagged IPs with confidence scores, risk levels, and country/ISP information.',
     BulkCheckSchema.shape,
     async (args: unknown) => {
-      const text = await handleBulkCheck(client, args as Parameters<typeof handleBulkCheck>[1]);
+      const parsed = BulkCheckSchema.parse(args);
+      const text = await handleBulkCheck(client, parsed);
+      const tokenCheck = checkTokenLimit(text, maxTokenCall, parsed.break_token_rule ?? false);
+      if (!tokenCheck.allowed) {
+        return { content: [{ type: 'text', text: tokenCheck.error! }] };
+      }
       return { content: [{ type: 'text', text }] };
     }
   );

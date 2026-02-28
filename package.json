@@ -1,7 +1,7 @@
 {
   "name": "@tocharianou/abuseipdb-mcp",
   "description": "AbuseIPDB MCP Server – IP reputation, abuse confidence scoring, and threat blacklist",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "mcpName": "io.github.TocharianOU/abuseipdb",
   "license": "Apache-2.0",
   "author": "TocharianOU",
@@ -39,6 +39,7 @@
     "@modelcontextprotocol/sdk": "1.23.0",
     "@types/express": "^5.0.3",
     "axios": "^1.8.4",
+    "tiktoken": "^1.0.7",
     "dotenv": "^16.4.5",
     "express": "^5.1.0",
     "zod": "^3.24.2"
